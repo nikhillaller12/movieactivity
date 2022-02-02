@@ -1,35 +1,34 @@
-import React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Stack from '@mui/material/Stack';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import React from "react";
+import { Link } from 'react-router-dom';
 
-function appBarLabel(label) {
-  return (
-    <Toolbar>
-      <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-        {label}
-      </Typography>
-    </Toolbar>
-  );
+
+const Navbar=()=>{
+    return (
+      <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+        <div className="container-fluid">
+          <Link className="navbar-brand" to='/'>
+            Movies Mania
+          </Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item"><Link className="nav-link" aria-current="page" to='/'>Home</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/f">Favourite</Link></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    )
 }
 
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-    primary: {
-      main: '#1976d2',
-    },
-  },
-});
-
-export default function Navbar() {
-  return  <Stack spacing={2} sx={{ flexGrow: 1 }}>
-  <ThemeProvider theme={darkTheme}>
-    <AppBar position="static" color="primary">
-      {appBarLabel('Movie Mania')}
-    </AppBar>
-  </ThemeProvider>
-</Stack>
-}
+export default Navbar

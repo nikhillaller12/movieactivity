@@ -1,31 +1,24 @@
-import React,{ useEffect, useState } from 'react';
+import React,{ useEffect, useState, useContext  } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Favourite from './Favourite';
-
+import  MovieContext from './Context';
 
 
 export default function Moviefetch() {
   const [articles, setArticles] = useState([]);
-  const [fav, setFav] = useState([]);
-
-  const update = async () => {
+  const {movieList,update} = useContext(MovieContext);
+  const update1 = async () => {
     const url ="https://www.omdbapi.com/?i=tt3896198&apikey=f14b2847&s=Game%20of%20Thrones";
     let data = await fetch(url);
     let pdata = await data.json();
     setArticles(pdata.Search);
   };
-  const handlefav = (element1)=>{
-    setFav(fav.concat(element1));
-    console.log(fav);
-    <Favourite art={fav}/>
-  }
   useEffect(() => {
-    update();
+    update1();
   }, []);
 
   return <div>
@@ -51,7 +44,7 @@ export default function Moviefetch() {
               </CardContent>
               <CardActions>
                 <Button size="small">Share</Button>
-                <Button onClick={handlefav} size="small">Add To Favourite</Button>
+                <Button onClick={()=>{update(element)}} size="small">Add To Favourite</Button>
               </CardActions>
             </Card>
             </div>
